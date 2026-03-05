@@ -1,9 +1,12 @@
-document.onload = function()
-{
-    filtr = document.getElementById("filtr");
-    filtr.addEventListener("change", Filtrowanie())
+console.log("działa")
+const filtr = document.getElementById("filtr");
+const items = document.querySelectorAll(".lista li");
 
-    // function Filtrowanie() {
-    //     Filtruj
-    // }
-}
+filtr.addEventListener('input', function() {
+    const filtrujtekst = this.value.trim().toLowerCase();
+
+    items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.classList.toggle('hidden', !text.includes(filtrujtekst))
+    });
+});
