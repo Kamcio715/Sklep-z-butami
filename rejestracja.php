@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -32,15 +31,27 @@
             <h3>Podaj nazwę użytkownika</h3>
             <input type="text" name="nazwa"><br>
             <h3>Podaj hasło:</h3>
-            <input type="text" name="pass"><br>
+            <input type="password" name="pass"><br>
             <h3>Potwierdź hasło:</h3>
-            <input type="text" name="potpass"><br>
-            <?php 
-                if(TRUE) {
-                    fopen("logowanie.html","r+");
+            <input type="password" name="ppass"><br>
+            <!-- php -->
+            <?php
+                $user['imie'] = $_POST['imie'];
+                $user['nazwisko'] = $_POST['nazwisko'];
+                $user['numer'] = $_POST['numer'];
+                $user['mail'] = $_POST['mail'];
+                $user['nazwa'] = $_POST['nazwa'];
+                $user['pass'] = $_POST['pass'];
+                $user['ppass'] = $_POST['ppass'];
+                if ($user['pass'] == $user['ppass'])
+                {
+                    $url = "logowanie.html";
+                    header("Location: $url");
+                    exit();
                 }
-                else {
-                    echo"Konto z takimi danymi już istnieje, spróbuj ponownie";
+                else
+                {
+                    echo"Konto z takimi danymi już istnieje";
                 }
             ?>
             <input class="guzik" type="submit" value="Zarejestruj się">

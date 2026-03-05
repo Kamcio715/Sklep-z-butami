@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -24,14 +23,21 @@
             <h1>Podaj nazwę użytkownika:</h1>
             <input type="text" name="nazwa"><br>
             <h1>Podaj hasło:</h1>
-            <input type="text" name="pass"><br>
+            <input type="password" name="pass"><br>
+            <!-- php -->
             <?php
-                if (TRUE)
+                $user['nazwa'] = $_POST['nazwa'];
+                $user['pass'] = $_POST['pass'];
+                if ($user['nazwa'] == TRUE)
                 {
-                    fopen("index.html","r+");
+                    $url = "index.html";
+                    header("Location: $url");
+                    exit();
                 }
                 else
+                {
                     echo"Błędne dane logowania";
+                }
             ?>
             <input type="submit" class="guzik" value="Zaloguj się">
         </form>
