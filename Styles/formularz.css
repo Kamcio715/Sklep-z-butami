@@ -4,7 +4,7 @@
     text-shadow: 2px 2px 5px #ffffff;
     border-radius: 15px;
     box-shadow: 2px 2px 5px rgb(63, 63, 63);
-    background-color: rgb(95, 82, 180);
+    background-color: rgb(189, 209, 224);
     color: black;
     padding-bottom: 3%;
     max-width: 600px;
@@ -36,5 +36,5 @@
     align-items: center;
 }
 body {
-    background-color: rgb(128, 120, 180);
+    background-color: rgb(255, 255, 255);
 }
