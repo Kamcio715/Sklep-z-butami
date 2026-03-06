@@ -3,37 +3,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
-    <link rel="stylesheet" href="formularz.css">
+    <link rel="stylesheet" href="Styles/formularz.css">
+    <link rel="stylesheet" href="Styles/naglowek.css">
 </head>
 <body>
     <!-- Nagłówek -->
     <header class="naglowek">
-        <a class="lewo" href="index.html"><img src="images/logo.png" alt="logo strony"></a>
+        <a class="lewo" href="index.html"><img src="Images/logo.png" alt="logo strony"></a>
         <h1 class="tytul">Buty.pl</h1>
         <div class="prawo">
             <a href="logowanie.html">Logowanie</a>
             <a href="rejestracja.html">Rejestracja</a>
-            <a href="koszyk.html"><img class="koszyk" src="images/koszyk.png" alt="koszyk"></a>
+            <a href="koszyk.html"><img class="koszyk" src="Images/koszyk.png" alt="koszyk"></a>
+            <a href="uzytkownik.html"><img src="Images/user.png" alt="ikona użytkownika"></a>
         </div>
     </header>
     <!-- Formularz rejestracji -->
     <div class="formularz">
         <form action="rejestracja.php" method="post">
-            <p>Zarejestruj się</p>
-            <h3>Podaj imię:</h3> 
-            <input type="text" name="imie"><br>
-            <h3>Podaj nazwisko:</h3>
-            <input type="text" name="nazwisko"><br>
-            <h3>Podaj numer telefonu:</h3>
-            <input type="text" name="numer"><br>
-            <h3>Podaj e-maila:</h3>
-            <input type="text" name="mail"><br>
-            <h3>Podaj nazwę użytkownika</h3>
-            <input type="text" name="nazwa"><br>
-            <h3>Podaj hasło:</h3>
-            <input type="password" name="pass"><br>
-            <h3>Potwierdź hasło:</h3>
-            <input type="password" name="ppass"><br>
+            <p>Zarejestruj się</p> 
+            <input type="text" name="imie" placeholder="Podaj imię" required><br>
+            <input type="text" name="nazwisko" placeholder="Podaj nazwisko" required><br>
+            <input type="number" name="numer" placeholder="Podaj numer telefonou" required><br>
+            <input type="mail" name="mail" placeholder="Podaj adres e-mail" required><br>
+            <input type="text" name="nazwa" placeholder="Podaj nazwę użytkownika" required><br>
+            <input type="password" name="pass" placeholder="Podaj hasło" required><br>
+            <input type="password" name="potpass" placeholder="Powtórz hasło" required><br>
             <!-- php -->
             <?php
                 $user['imie'] = $_POST['imie'];
