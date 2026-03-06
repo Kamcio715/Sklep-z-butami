@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie na stronie</title>
-    <link rel="stylesheet" href="formularz.css">
-    <link rel="stylesheet" href="naglowek.css">
+    <link rel="stylesheet" href="Styles/formularz.css">
+    <link rel="stylesheet" href="Styles/naglowek.css">
 </head>
 <body>
     <!-- Nagłówek -->
@@ -20,12 +20,10 @@
     </header>
     <!-- Formularz logowania -->
     <div class="formularz">
-        <form action="logowanie.php" method="post">
+        <form action="logowanie.php" method="post" style="margin-top: 7%;">
             <p>Zaloguj się</p>
-            <h1>Podaj nazwę użytkownika:</h1>
-            <input type="text" name="nazwa"><br>
-            <h1>Podaj hasło:</h1>
-            <input type="password" name="pass"><br>
+            <input type="text" name="nazwa" placeholder="Podaj nazwę użytkownika"><br>
+            <input type="password" name="pass" placeholder="Podaj hasło"><br>
             <input type="submit" class="guzik" value="Zaloguj się">
         </form>
     </div>

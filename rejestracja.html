@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
-    <link rel="stylesheet" href="formularz.css">
-    <link rel="stylesheet" href="naglowek.css">
+    <link rel="stylesheet" href="Styles/formularz.css">
+    <link rel="stylesheet" href="Styles/naglowek.css">
 </head>
 <body>
     <!-- Nagłówek -->
@@ -22,21 +22,14 @@
     <!-- Formularz rejestracji -->
     <div class="formularz">
         <form action="rejestracja.php" method="post">
-            <p>Zarejestruj się</p>
-            <h3>Podaj imię:</h3> 
-            <input type="text" name="imie" required><br>
-            <h3>Podaj nazwisko:</h3>
-            <input type="text" name="nazwisko" required><br>
-            <h3>Podaj numer telefonu:</h3>
-            <input type="text" name="numer" required><br>
-            <h3>Podaj e-maila:</h3>
-            <input type="text" name="mail" required><br>
-            <h3>Podaj nazwę użytkownika</h3>
-            <input type="text" name="nazwa" required><br>
-            <h3>Podaj hasło:</h3>
-            <input type="password" name="pass" required><br>
-            <h3>Potwierdź hasło:</h3>
-            <input type="password" name="potpass" required><br>
+            <p>Zarejestruj się</p> 
+            <input type="text" name="imie" placeholder="Podaj imię" required><br>
+            <input type="text" name="nazwisko" placeholder="Podaj nazwisko" required><br>
+            <input type="text" name="numer" placeholder="Podaj numer telefonou" required><br>
+            <input type="text" name="mail" placeholder="Podaj adres e-mail" required><br>
+            <input type="text" name="nazwa" placeholder="Podaj nazwę użytkownika" required><br>
+            <input type="password" name="pass" placeholder="Podaj hasło" required><br>
+            <input type="password" name="potpass" placeholder="Powtórz hasło" required><br>
             <input class="guzik" type="submit" value="Zarejestruj się">
         </form>
     </div>
