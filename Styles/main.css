@@ -4,10 +4,17 @@ div div {
 li.hidden { 
     display: none; 
 }
-.widok {
+.widok{
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+.widok img{
+    width: 300px;
+    height: 400px;
+}
+.lista{
+    list-style-type: none;
 }
 .szukaj {
     display: flex;
