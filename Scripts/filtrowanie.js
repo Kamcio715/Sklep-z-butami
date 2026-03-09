@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-        console.log("działa")
         // Get references to input and list
         const filtr = document.getElementById('filtr');
         const lista = document.querySelectorAll('.lista li');
+        const nazwa = document.querySelectorAll('.nazwa');
         const marka = document.getElementById('marka');
         const kat = document.getElementById('kat');
         const rodz = document.getElementById('rodz');
@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const filtrujtekst = this.value.trim().toLowerCase();
 
             // Loop through list items and toggle visibility
-            lista.forEach(item => 
+            nazwa.forEach(item => 
             {
                 const text = item.textContent.toLowerCase();
-                item.classList.toggle('hidden', !text.includes(filtrujtekst));
+                const li = item.closest('li');  // Find the parent <li>
+                li.classList.toggle('hidden', !text.includes(filtrujtekst));
             });
         });
         marka.addEventListener('input', function () 
