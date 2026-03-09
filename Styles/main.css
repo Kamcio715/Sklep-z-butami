@@ -31,3 +31,6 @@ li.hidden {
     font-size: 18px;
     box-shadow: 4px 9px rgb(162, 191, 207);
 }
+.details{
+    display: inline;
+}
