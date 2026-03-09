@@ -7,11 +7,13 @@
     min-width: 150px;
     align-items: center;
     text-shadow: 2px 2px #ffffff;
+    align-items: center;
+    justify-content: space-between;
 }
-.naglowek div {
+.naglowek .prawo {
     display: flex;
     align-items: center;
-    text-shadow: 2px 2px #ffffff;
+    padding-left: 100px;
 }
 a:link {
     text-decoration: none;
