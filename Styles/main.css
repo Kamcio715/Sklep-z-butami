@@ -4,10 +4,15 @@ div div {
 li.hidden { 
     display: none; 
 }
+li{
+    display: inline-block;
+}
 .widok{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
 }
 .widok img{
     width: 300px;
