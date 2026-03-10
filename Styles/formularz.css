@@ -38,3 +38,13 @@
 body {
     background-color: rgb(255, 255, 255);
 }
+.back, .loguj{
+    margin-bottom: 10px;
+    text-align: left;
+}
+.back a, .loguj a{
+    text-decoration: none;
+    color: steelblue;
+    font-weight: bold;
+    font-size: 17px;
+}
