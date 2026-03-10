@@ -1,6 +1,17 @@
 div div {
     align-items: center;
 }
+.widok{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    
+}
+.lista{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
 li.hidden { 
     display: none; 
 }
@@ -15,7 +26,7 @@ li{
     margin-left: 20px;
 }
 .widok img{
-    width: 300px;
+    width: 2fr;
     height: 400px;
 }
 .lista{
