@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
         // Zmienne do przechowywania elementów DOM
+
         const filtr = document.getElementById('filtr');
         const lista = document.querySelectorAll('.lista li');
         const nazwa = document.querySelectorAll('.nazwa');
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const max = document.getElementById('max');
 
         // Nasłuchiwanie na wpisywanie tekstu w filtrze
+
         filtr.addEventListener('input', function () 
         {
             const filtrujtekst = this.value.trim().toLowerCase();
@@ -23,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 li.classList.toggle('hidden', !text.includes(filtrujtekst));
             });
         });
+
+        // Przetwarzanie cen i przechowywanie ich w atrybucie data-price
+
         cena.forEach(item =>
         {
             nowacena.push(item.textContent.replace(' zł', ''));
@@ -51,10 +56,29 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        function pocenie()
-        {
+        // Funkcja do filtrowania po cenie
+
+        function pocenie() {
+            const minValue = parseFloat(min.value);
+            const maxValue = parseFloat(max.value);
+            lista.forEach(item => {
+                const price = nowacena[Array.from(lista).indexOf(item)];
+                if (!isNaN(minValue) && !isNaN(maxValue)) {
+                    if (price >= minValue && price <= maxValue) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                }
+                else
+                {
+                    item.classList.remove('hidden');
+                }
+            });
 
         }
+
+        //Wywoływanie funkcji filtrowania
 
         marka.addEventListener('input', filtrowanie);
         kat.addEventListener('input', filtrowanie);
