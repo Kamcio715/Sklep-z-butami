@@ -50,62 +50,7 @@ li{
 .details{
     display: inline;
 }
-.gora {
-    display: grid;
-    grid-template-columns: 2fr 8fr 2fr;
-    grid-column: 1 / 13;
-    grid-row: 1 / 2;
-    align-items: center;
-    padding: 10px 40px 10px 40px;
-    background-color: aliceblue;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
-}
-.logo {
-    max-width: 130px;
-}
-.logo > img {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-.tytul {
-    text-align: center;
-    font-size: 32px;
-    margin: 0;
-}
-.prawo {
-    align-items: center;
-    display: flex;
-}
-.rejestracja, .login, .koszyk {
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 16px;
-    border: 1px solid black;
-    font-weight: bold;
-    background: rgb(162, 191, 207);
-    color: white;
-    border-color: steeblblblaue;
-    box-shadow: 0 4px 10px rgba(70,130,180,0.4);
-    margin-top: auto;
-    margin-right: 5px;
-}
-.user{
-    border-radius: 50%;
-    border: 1px solid black;
-}
-.prawo a{
-    text-decoration: none;
-    color: white;
-}
-.koszyk {
-    background-color: white;
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    border: 1px solid black;
-    font-size: 18px;
-}
+
 /* li{
     display: inline-block;
 } */

@@ -1,51 +1,89 @@
 document.addEventListener("DOMContentLoaded", function () {
-        // Get references to input and list
+        // Zmienne do przechowywania elementów DOM
+
         const filtr = document.getElementById('filtr');
         const lista = document.querySelectorAll('.lista li');
         const nazwa = document.querySelectorAll('.nazwa');
         const marka = document.getElementById('marka');
         const kat = document.getElementById('kat');
         const rodz = document.getElementById('rodz');
+        const cena = document.querySelectorAll('.cena');
+        var nowacena = new Array();
+        const min = document.getElementById('min');
+        const max = document.getElementById('max');
 
-        // Listen for input changes
+        // Nasłuchiwanie na wpisywanie tekstu w filtrze
+
         filtr.addEventListener('input', function () 
         {
             const filtrujtekst = this.value.trim().toLowerCase();
 
-            // Loop through list items and toggle visibility
             nazwa.forEach(item => 
             {
                 const text = item.textContent.toLowerCase();
-                const li = item.closest('li');  // Find the parent <li>
+                const li = item.closest('li');  // Znajdź najbliższy element li
                 li.classList.toggle('hidden', !text.includes(filtrujtekst));
             });
         });
-        marka.addEventListener('input', function () 
+
+        // Przetwarzanie cen i przechowywanie ich w atrybucie data-price
+
+        cena.forEach(item =>
         {
-            const filtrujmarki = this.value;
-            lista.forEach(item => 
-            {
-                const marka = item.textContent;
-                item.classList.toggle('hidden', !marka.includes(filtrujmarki));
-            });
+            nowacena.push(item.textContent.replace(' zł', ''));
+            item.dataset.price = nowacena[nowacena.length - 1];
         });
-        kat.addEventListener('input', function() 
+
+
+        // Funkcja do filtrowania
+
+        function filtrowanie()
         {
-            const filtrujkat = this.value;
-            lista.forEach(item => 
+            const filtrujmarki = document.getElementById('marka').value;
+            const filtrujkat = document.getElementById('kat').value;
+            const filtrujrodz = document.getElementById('rodz').value;
+            lista.forEach(item =>
             {
-                const kat = item.textContent;
-                item.classList.toggle('hidden', !kat.includes(filtrujkat));
+                const text = item.textContent;
+                if(text.includes(filtrujmarki) && text.includes(filtrujkat) && text.includes(filtrujrodz))
+                {
+                    item.classList.remove('hidden');
+                }
+                else
+                {
+                    item.classList.add('hidden');
+                }
             });
-        });
-        rodz.addEventListener('input', function() 
-        {
-            const filtrujrodz = this.value;
-            lista.forEach(item => 
-            {
-                const rodz = item.textContent;
-                item.classList.toggle('hidden', !rodz.includes(filtrujrodz));
+        }
+
+        // Funkcja do filtrowania po cenie
+
+        function pocenie() {
+            const minValue = parseFloat(min.value);
+            const maxValue = parseFloat(max.value);
+            lista.forEach(item => {
+                const price = nowacena[Array.from(lista).indexOf(item)];
+                if (!isNaN(minValue) && !isNaN(maxValue)) {
+                    if (price >= minValue && price <= maxValue) {
+                        item.classList.remove('hidden');
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                }
+                else
+                {
+                    item.classList.remove('hidden');
+                }
             });
-        });
+
+        }
+
+        //Wywoływanie funkcji filtrowania
+
+        marka.addEventListener('input', filtrowanie);
+        kat.addEventListener('input', filtrowanie);
+        rodz.addEventListener('input', filtrowanie);
+        min.addEventListener('input', pocenie);
+        max.addEventListener('input', pocenie);
 
 });
