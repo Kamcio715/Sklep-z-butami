@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.topbar {
+    background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 16px 0;
+    margin-bottom: 20px;
+}
+
+.topbar-inner {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.container-shop {
+    width: min(1200px, 92%);
+    margin: 0 auto 40px auto;
+}
+
+.szukaj {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.szukaj form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.szukaj_input {
+    width: 600px;
+    max-width: 100%;
+    height: 48px;
+    border: 1px solid black;
+    border-radius: 24px;
+    margin-top: 20px;
+    padding: 0 20px;
+    font-size: 18px;
+    box-shadow: 4px 9px rgb(162, 191, 207);
+    background: white;
+}
+
+.layout-shop {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.filters {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.filters h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.filters label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.filters select,
+.filters input[type="text"] {
+    width: 100%;
+    margin-bottom: 18px;
+    padding: 10px 12px;
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    font-size: 15px;
+    background: white;
+}
+
+.filters .buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-main,
+.btn-soft,
+.btn-danger {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #111;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-main {
+    background: #111;
+    color: white;
+}
+
+.btn-soft {
+    background: white;
+    color: #111;
+}
+
+.btn-danger {
+    background: #c62828;
+    border-color: #c62828;
+    color: white;
+}
+
+.widok {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+.lista {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.lista li {
+    display: inline-block;
+}
+
+li.hidden {
+    display: none;
+}
+
+.product-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+
+.no-image {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ddd;
+    color: #555;
+    font-weight: 700;
+}
+
+.details {
+    display: inline;
+}
+
+.product-body {
+    padding: 16px;
+}
+
+.product-body h4 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+}
+
+.product-brand {
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.product-price {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.product-meta {
+    margin-bottom: 4px;
+}
+
+.alert-box {
+    background: #fff3cd;
+    color: #856404;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.pagination-wrap {
+    margin-top: 24px;
+}
+
+@media (max-width: 992px) {
+    .layout-shop {
+        grid-template-columns: 1fr;
+    }
+
+    .widok {
+        margin-left: 0;
+    }
+
+    .lista {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .lista {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar-inner {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
