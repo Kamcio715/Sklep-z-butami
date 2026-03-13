@@ -30,6 +30,7 @@
         <div class="szukaj">
             <input type="text" class="szukaj_input" id="filtr" placeholder="Wyszukaj swoich wymarzonych butów">
         </div>
+        <!-- Filtrowanie -->
         <details class="details">
             <h3>Wybierz markę</h3>
             <select id="marka">
@@ -74,7 +75,7 @@
                             @endif
 
                             <div class="product-body">
-                                <h4>{{ $shoe->name }}</h4>
+                                <h4 class="nazwa">{{ $shoe->name }}</h4>
                                 <div class="product-brand">{{ $shoe->brand }}</div>
                                 <div class="product-price">
                                     {{ number_format($shoe->price, 2, ',', ' ') }} zł
