@@ -7,6 +7,8 @@
     <!-- <link rel="stylesheet" href="Styles/main.css">
     <link rel="stylesheet" href="Styles/naglowek.css">
     <script src="Scripts/filtrowanie.js"></script> -->
+    <link rel="stylesheet" href="http://localhost/dashboard/strona/public/css/main.css">
+
 </head>
 <body>
     @extends('layouts.app')
@@ -66,6 +68,7 @@
                 <ul class="lista">
                     @foreach($shoes as $shoe)
                     <li>
+                    <a href="{{ route('shoes.show', $shoe) }}" class="product-link">       
                         <div class="product-card">
                             @if($shoe->image)
                                 <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->name }}">
@@ -81,14 +84,9 @@
                                 </div>
                                 <div class="product-meta">{{ $shoe->category }}</div>
                                 <div class="product-meta">{{ $shoe->type }}</div>
-
-                                <div style="margin-top: 14px;">
-                                    <a href="{{ route('shoes.show', $shoe) }}" class="btn-main">
-                                        Zobacz produkt
-                                    </a>
-                                </div>
                             </div>
                         </div>
+                    </a>
                     </li>
                 @endforeach
                 </ul>
