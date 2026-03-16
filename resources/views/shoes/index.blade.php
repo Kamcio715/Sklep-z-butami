@@ -1,103 +1,112 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sklep z butami</title>
-    <!-- <link rel="stylesheet" href="Styles/main.css">
-    <link rel="stylesheet" href="Styles/naglowek.css">
-    <script src="Scripts/filtrowanie.js"></script> -->
-</head>
-<body>
     @extends('layouts.app')
 
-    @section('content')
-    
-    <!-- Nagłówek -->
-        <header class="gora">
-            <div class="logo">
-                <a class="lewo" href="index.html"><img src="Images/logo.png" alt="logo strony"></a>
-            </div>
-            <h1 class="tytul">Buty.pl</h1>
-            <div class="prawo">
-                <button class="rejestracja"><a href="rejestracja.html">Zarejestruj się</a></button>
-                <button class="login"><a href="logowanie.html">Zaloguj się</a></button>
-                <a href="koszyk.html"><img class="koszyk" src="Images/koszyk.png" alt="koszyk"></a>
-                <a href="uzytkownik.html"><img class="user" src="Images/user.png" alt="ikona użytkownika"></a>
-            </div>
-        </header>
-        <!-- Szukanie po nazwie -->
-        <div class="szukaj">
-            <input type="text" class="szukaj_input" id="filtr" placeholder="Wyszukaj swoich wymarzonych butów">
-        </div>
-        <details class="details">
-            <h3>Wybierz markę</h3>
-            <select id="marka">
-                <option value="">Wszystkie</option>
-                @foreach($brands as $brand)
-                    <option value="{{ $brand }}" @selected(request('brand') == $brand)>
-                        {{ $brand }}
-                    </option>
-                @endforeach
-            </select>
-            <h3>Wybierz kategorię</h3>
-            <select id="kat">
-                <option value="">Wszystkie</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category }}" @selected(request('category') == $category)>
-                        {{ $category }}
-                    </option>
-                @endforeach
-            </select>
-            <h3>Wybierz Rodzaj</h3>
-            <select id="rodz">
-                <option value="">Wszystkie</option>
-                @foreach($types as $type)
-                    <option value="{{ $type }}" @selected(request('type') == $type)>
-                        {{ $type }}
-                    </option>
-                @endforeach
-            </select>
-            <input type="text" id="min" placeholder="Min cena">
-            <input type="text" id="max" placeholder="Max cena">
-        </details>
-        <!-- Buty -->
-        <div class="widok">
+@section('content')
+<div class="container-shop">
+
+    <div class="szukaj">
+        <form method="GET" action="{{ route('shoes.index') }}">
+            <input
+                type="text"
+                name="q"
+                class="szukaj_input"
+                placeholder="Wyszukaj swoich wymarzonych butów"
+                value="{{ request('q') }}"
+            >
+
+            <input type="hidden" name="brand" value="{{ request('brand') }}">
+            <input type="hidden" name="category" value="{{ request('category') }}">
+            <input type="hidden" name="type" value="{{ request('type') }}">
+        </form>
+    </div>
+
+    <div class="layout-shop">
+        <aside class="filters">
+            <h3>Filtry</h3>
+
+            <form method="GET" action="{{ route('shoes.index') }}">
+                <input type="hidden" name="q" value="{{ request('q') }}">
+
+                <label for="brand">Wybierz markę</label>
+                <select name="brand" id="brand">
+                    <option value="">Wszystkie</option>
+                    @foreach($brands as $brand)
+                        <option value="{{ $brand }}" @selected(request('brand') == $brand)>
+                            {{ $brand }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <label for="category">Wybierz kategorię</label>
+                <select name="category" id="category">
+                    <option value="">Wszystkie</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category }}" @selected(request('category') == $category)>
+                            {{ $category }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <label for="type">Wybierz rodzaj</label>
+                <select name="type" id="type">
+                    <option value="">Wszystkie</option>
+                    @foreach($types as $type)
+                        <option value="{{ $type }}" @selected(request('type') == $type)>
+                            {{ $type }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <div class="buttons">
+                    <button type="submit" class="btn-main">Filtruj</button>
+                    <a href="{{ route('shoes.index') }}" class="btn-soft">Wyczyść</a>
+                </div>
+            </form>
+        </aside>
+
+        <section class="widok">
+            @if($shoes->count())
                 <ul class="lista">
                     @foreach($shoes as $shoe)
-                    <li>
-                        <div class="product-card">
-                            @if($shoe->image)
-                                <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->name }}">
-                            @else
-                                <div class="no-image">Brak zdjęcia</div>
-                            @endif
+                        <li>
+                            <a href="{{ route('shoes.show', $shoe) }}" class="product-link">
+                                <div class="product-card">
+                                    @if($shoe->image)
+                                        <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->name }}">
+                                    @else
+                                        <div class="no-image">Brak zdjęcia</div>
+                                    @endif
 
-                            <div class="product-body">
-                                <h4 class="nazwa">{{ $shoe->name }}</h4>
-                                <div class="product-brand">{{ $shoe->brand }}</div>
-                                <div class="product-price">
-                                    {{ number_format($shoe->price, 2, ',', ' ') }} zł
-                                </div>
-                                <div class="product-meta">{{ $shoe->category }}</div>
-                                <div class="product-meta">{{ $shoe->type }}</div>
+                                    <div class="produkt">
+                                        <h4 class="nazwa">{{ $shoe->name }}</h4>
+                                        <div class="product-brand">{{ $shoe->brand }}</div>
+                                        <div class="product-price">
+                                            {{ number_format($shoe->price, 2, ',', ' ') }} zł
+                                        </div>
+                                        <div class="product-meta">{{ $shoe->category }}</div>
+                                        <div class="product-meta">{{ $shoe->type }}</div>
 
-                                <div style="margin-top: 14px;">
-                                    <a href="{{ route('shoes.show', $shoe) }}" class="btn-main">
-                                        Zobacz produkt
-                                    </a>
+                                        <div style="margin-top: 14px;">
+                                            <span class="btn-main">Zobacz produkt</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </li>
-                @endforeach
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
-        </div>
-        <img src="images/sunflower.png" style="opacity: 6.7%; width: 100%; height: 40px;" onclick="window.open('https://i.imgflip.com/6m7i18.png?a492312')">
-    @endsection
+            @else
+                <div class="alert-box" style="width: 100%;">
+                    Brak produktów spełniających wybrane kryteria.
+                </div>
+            @endif
+        </section>
+    </div>
 
-</body>
-</html>
+    <div class="pagination-wrap">
+        {{ $shoes->links() }}
+    </div>
+</div>
+@endsection
 
 
 <!-- <li>

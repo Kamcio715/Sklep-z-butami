@@ -26,7 +26,8 @@ a {
     align-items: center;
 }
 
-.logo {
+.logo,
+.brand-logo {
     font-size: 28px;
     font-weight: 700;
 }
@@ -119,6 +120,7 @@ a {
     border: 1px solid #111;
     font-size: 14px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-main {
@@ -195,13 +197,14 @@ li.hidden {
 }
 
 .product-body {
-    padding: 16px;
+    padding: 20px;
 }
 
-.product-body h4 {
+/* .product-body h4,
+.nazwa {
     margin: 0 0 8px 0;
     font-size: 20px;
-}
+} */
 
 .product-brand {
     color: #555;
