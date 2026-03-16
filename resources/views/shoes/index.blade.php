@@ -52,6 +52,7 @@
         </details>
         <!-- Buty -->
         <div class="widok">
+            @if($shoes->count() > 0)
                 <ul class="lista">
                     @foreach($shoes as $shoe)
                         <li>
