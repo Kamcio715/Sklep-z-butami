@@ -8,27 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ShoeController extends Controller
 {
-    public function index(Request $request)
+    public function index()
 {
-    $query = Shoe::query();
-
-    if ($request->filled('brand')) {
-        $query->where('brand', $request->brand);
-    }
-
-    if ($request->filled('category')) {
-        $query->where('category', $request->category);
-    }
-
-    if ($request->filled('type')) {
-        $query->where('type', $request->type);
-    }
-
-    if ($request->filled('q')) {
-        $query->where('name', 'like', '%' . $request->q . '%');
-    }
-
-    $shoes = $query->latest()->paginate(12)->withQueryString();
+    $shoes = Shoe::latest()->get();
 
     $brands = Shoe::select('brand')
         ->whereNotNull('brand')
@@ -50,6 +32,7 @@ class ShoeController extends Controller
 
     return view('shoes.index', compact('shoes', 'brands', 'categories', 'types'));
 }
+
 
 
     public function show(Shoe $shoe)
