@@ -31,7 +31,7 @@
                     </form>
                 @else
                     <a class="btn btn-soft btn-sm" href="{{ route('login') }}">Logowanie</a>
-                    <a class="btn btn-dark btn-sm" href="{{ route('register') }}">Rejestracja</a>
+                    <a class="btn btn-dark btn-sm" href="{{ route('register') }}" style="background-color: white; color: black;">Rejestracja</a>
                 @endauth
             </div>
         </div>

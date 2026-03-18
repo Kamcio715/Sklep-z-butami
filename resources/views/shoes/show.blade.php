@@ -34,43 +34,7 @@
         </form>
     </div>
 
-    <p>Proponowane produkty:</p>
-    <div class="widok">
-        @if($shoes->count())
-            <ul class="lista">
-                @foreach($shoes as $shoe)
-                    <li>
-                        <a href="{{ route('shoes.show', $shoe) }}" class="product-link">
-                            <div class="product-card">
-                                @if($shoe->image)
-                                    <img src="{{ asset('storage/' . $shoe->image) }}" alt="{{ $shoe->name }}">
-                                @else
-                                    <div class="no-image">Brak zdjęcia</div>
-                                @endif
-
-                                <div class="product-body">
-                                    <h4 class="nazwa">{{ $shoe->name }}</h4>
-                                    <div class="product-brand">{{ $shoe->brand }}</div>
-                                    <div class="cena">{{ number_format($shoe->price, 2, '.', '') }} zł</div>
-                                    <div class="product-meta">{{ $shoe->category }}</div>
-                                    <div class="product-meta">{{ $shoe->type }}</div>
-
-                                    <div style="margin-top: 14px;">
-                                        <span class="btn-main">Zobacz produkt</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        @else
-            <div class="alert-box" style="width: 100%;">
-                Brak produktów spełniających wybrane kryteria.
-            </div>
-        @endif
-    </div>
-</div>
+    
 
 <div class="row">
     <div class="col-md-8">
