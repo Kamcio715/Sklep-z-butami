@@ -75,8 +75,32 @@
                     <span>{{ $review->rating }}/5</span>
                 </div>
 
-                <p class="mb-1">{{ $review->content }}</p>
-                <small class="text-muted">{{ $review->created_at->format('d.m.Y H:i') }}</small>
+                <p class="mb-2">{{ $review->content }}</p>
+
+                @auth
+                    @if(auth()->id() === $review->user_id)
+                        <div class="d-flex gap-3">
+                            <span>
+                                <a href="{{ route('reviews.edit', $review) }}">Edytuj</a>
+                            </span>
+
+                            <span>
+                                <a href="{{ route('reviews.destroy', $review) }}"
+                                onclick="event.preventDefault(); document.getElementById('delete-review-{{ $review->id }}').submit();">
+                                    Usuń
+                                </a>
+                            </span>
+                        </div>
+
+                        <form id="delete-review-{{ $review->id }}"
+                            action="{{ route('reviews.destroy', $review) }}"
+                            method="POST"
+                            style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+                    @endif
+                @endauth
             </div>
         @empty
             <p>Ten produkt nie ma jeszcze opinii.</p>

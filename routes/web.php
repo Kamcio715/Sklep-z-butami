@@ -24,7 +24,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('orders.my');
 });
-Route::middleware('auth')->post('shoes/{shoe}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::middleware('auth')->group(function () {
+    Route::post('/shoes/{shoe}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+    Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+});
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/shoes', [ShoeController::class, 'adminIndex'])->name('shoes.index');

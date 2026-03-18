@@ -59,7 +59,11 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        //
+        if (Auth::id() !== $review->user_id) {
+            abort(403);
+        }
+
+        return view('reviews.edit', compact('review'));
     }
 
     /**
@@ -67,7 +71,19 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        if (Auth::id() !== $review->user_id) {
+            abort(403);
+        }
+
+        $data = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'content' => 'required|string|min:3|max:1000',
+        ]);
+
+        $review->update($data);
+
+        return redirect()->route('shoes.show', $review->shoe_id)
+            ->with('success', 'Opinia została zaktualizowana.');
     }
 
     /**
@@ -75,6 +91,14 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        if (Auth::id() !== $review->user_id) {
+            abort(403);
+        }
+
+        $shoeId = $review->shoe_id;
+        $review->delete();
+
+        return redirect()->route('shoes.show', $shoeId)
+            ->with('success', 'Opinia została usunięta.');
     }
 }
