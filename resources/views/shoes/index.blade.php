@@ -37,6 +37,14 @@
             @endforeach
         </select>
 
+        <h3>Wybierz rozmiar</h3>
+        <select id="rozm">
+            <option value="">Wszystkie</option>
+            @foreach($sizes as $size)
+                <option value="{{ $size }}">{{ $size }}</option>
+            @endforeach
+        </select>
+
         <h3>Cena</h3>
         <input type="text" id="min" placeholder="Min cena">
         <input type="text" id="max" placeholder="Max cena">
@@ -61,7 +69,7 @@
                                     <div class="cena">{{ number_format($shoe->price, 2, '.', '') }} zł</div>
                                     <div class="product-meta">{{ $shoe->category }}</div>
                                     <div class="product-meta">{{ $shoe->type }}</div>
-                                    <div class="product-meta" style="display: none;">{{ $shoe->size }}</div>
+                                    <div class="product-meta" id="rozmiar" style="display: none;">{{ $shoe->size }}</div>
                                     <div style="margin-top: 14px;">
                                         <span class="btn-main">Zobacz produkt</span>
                                     </div>

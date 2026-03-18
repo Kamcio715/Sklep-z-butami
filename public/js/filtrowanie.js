@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const max = document.getElementById('max');
         const logo = document.getElementById('logo');
         const search = document.getElementById('search');
+        const rozmiar = document.getElementById('rozm');
 
         // Nasłuchiwanie na kliknięcie logo i kliknięcie poza polem wyszukiwania
 
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const filtrujmarki = document.getElementById('marka').value;
             const filtrujkat = document.getElementById('kat').value;
             const filtrujrodz = document.getElementById('rodz').value;
+            const filtrujrozmiar = document.getElementById('rozm').value;
             lista.forEach(item =>
             {
                 const text = item.textContent;
@@ -91,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         marka.addEventListener('input', filtrowanie);
         kat.addEventListener('input', filtrowanie);
         rodz.addEventListener('input', filtrowanie);
+        rozmiar.addEventListener('input', filtrowanie);
         min.addEventListener('input', pocenie);
         max.addEventListener('input', pocenie);
 
