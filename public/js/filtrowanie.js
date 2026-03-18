@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const rozmiar = document.getElementById('rozm');
 
         // Nasłuchiwanie na kliknięcie logo i kliknięcie poza polem wyszukiwania
-        Sram na ciebie suko;
+
         logo.addEventListener('click', (e) => {
             e.preventDefault();
             search.classList.toggle('active');
