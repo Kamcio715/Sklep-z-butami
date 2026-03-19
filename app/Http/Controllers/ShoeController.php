@@ -30,7 +30,13 @@ class ShoeController extends Controller
         ->orderBy('type')
         ->pluck('type');
 
-    return view('shoes.index', compact('shoes', 'brands', 'categories', 'types'));
+    $sizes = Shoe::select('size')
+        ->whereNotNull('size')
+        ->distinct()
+        ->orderBy('size')
+        ->pluck('size');
+
+    return view('shoes.index', compact('shoes', 'brands', 'categories', 'types', 'sizes'));
 }
 
 
