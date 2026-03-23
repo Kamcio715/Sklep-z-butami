@@ -63,5 +63,12 @@
                 {{ __('Register') }}
             </x-primary-button>
         </div>
+        <div class="mt-4 text-center">
+        <a href="{{ route('google.redirect') }}" class="inline-flex items-center px-4 py-2 bg-red-500 text-white rounded-md">
+            Zarejestruj się przez Google
+        </a>
+    </div>
     </form>
+    
+
 </x-guest-layout>

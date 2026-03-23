@@ -19,6 +19,7 @@
                 <a class="btn btn-soft btn-sm" href="{{ route('cart.index') }}">Koszyk</a>
 
                 @auth
+                    <a href="{{ route('profile.edit') }}">Profil</a>
                     <a class="btn btn-soft btn-sm" href="{{ route('orders.my') }}">Moje zamówienia</a>
 
                     @if(auth()->user()->is_admin)

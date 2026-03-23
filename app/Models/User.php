@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'address',
         'phone',
+        'google_id',
         
     ];
     protected $casts = [

@@ -5,6 +5,7 @@ use App\Http\Controllers\ShoeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [ShoeController::class, 'index'])->name('shoes.index');
 Route::get('/shoes/{shoe}', [ShoeController::class, 'show'])->name('shoes.show');
@@ -40,6 +41,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'is_admin'])->group(
 });
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/my-orders', [CheckoutController::class, 'myOrders'])->name('orders.my');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
