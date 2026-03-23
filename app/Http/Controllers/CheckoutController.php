@@ -33,11 +33,13 @@ class CheckoutController extends Controller
         }
 
         $data = $request->validate([
-            'customer_name'  => 'required|string|max:255',
+            'customer_name' => 'required|string|max:255',
             'customer_email' => 'required|email',
             'customer_phone' => 'nullable|string|max:50',
-            'address'        => 'required|string|max:500',
+            'address' => 'required|string|max:500',
         ]);
+
+        $data['user_id'] = Auth::check() ? Auth::id() : null;
 
         $total = 0;
         foreach ($cart as $item) {
@@ -45,25 +47,30 @@ class CheckoutController extends Controller
         }
 
         Order::create([
-            'user_id'        => Auth::id(),
-            'customer_name'  => $data['customer_name'],
+            'user_id' => $data['user_id'],
+            'customer_name' => $data['customer_name'],
             'customer_email' => $data['customer_email'],
             'customer_phone' => $data['customer_phone'] ?? null,
-            'address'        => $data['address'],
-            'total'          => $total,
-            'items'          => $cart,
+            'address' => $data['address'],
+            'total' => $total,
+            'items' => $cart,
         ]);
 
         session()->forget('cart');
 
-        return redirect()->route('orders.my')->with('success', 'Zamówienie zostało złożone.');
+        return redirect()->route('shoes.index')->with('success', 'Zamówienie zostało złożone.');
     }
+
 
     public function myOrders()
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $orders = $user->orders()->latest()->paginate(10);
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $orders = Order::where('user_id', Auth::id())
+            ->latest()
+            ->paginate(10);
 
         return view('orders.my', compact('orders'));
     }

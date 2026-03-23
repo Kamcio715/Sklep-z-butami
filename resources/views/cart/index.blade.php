@@ -17,10 +17,12 @@
                 <tr>
                     <th>Produkt</th>
                     <th>Marka</th>
-                    <th>Cena</th>
+                    <th>Rozmiar</th>
+                    <th>Opis</th>
                     <th>Ilość</th>
-                    <th>Suma</th>
+                    <th>Cena</th>
                     <th>Akcja</th>
+                    <th>Razem</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +30,9 @@
                     <tr>
                         <td>{{ $item['name'] }}</td>
                         <td>{{ $item['brand'] }}</td>
+                        <td>{{ $item['size'] }}</td>
+                        <td>{{ $item['description'] }}</td>
+                        <td>{{ $item['type'] }}</td>
                         <td>{{ number_format($item['price'], 2, ',', ' ') }} zł</td>
                         <td>
                             <form action="{{ route('cart.update', $item['id']) }}" method="POST" class="d-flex gap-2">
