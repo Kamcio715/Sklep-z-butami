@@ -17,6 +17,7 @@ class CartController extends Controller
         session()->put('cart', $cart);
     }
 
+    // Wyświetlanie zawartości koszyka
     public function index()
     {
         $cart = $this->getCart();
@@ -29,6 +30,7 @@ class CartController extends Controller
         return view('cart.index', compact('cart', 'total'));
     }
 
+    // Zwiekszanie ilosci produktów w koszyku
     public function add(Request $request, Shoe $shoe)
     {
         $quantity = max(1, (int) $request->input('quantity', 1));
@@ -41,6 +43,9 @@ class CartController extends Controller
                 'id' => $shoe->id,
                 'name' => $shoe->name,
                 'brand' => $shoe->brand,
+                'size' => $shoe->size,
+                'description' => $shoe->description,
+                'type' => $shoe->type,
                 'price' => $shoe->price,
                 'quantity' => $quantity,
                 'image' => $shoe->image,

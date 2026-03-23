@@ -28,4 +28,9 @@
             </button>
         </form>
     </div>
+    <script>
+        setInterval(() => {
+            window.location.reload();
+        }, 3000);
+    </script>
 </x-guest-layout>
