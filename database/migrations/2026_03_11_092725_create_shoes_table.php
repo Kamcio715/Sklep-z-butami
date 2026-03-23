@@ -15,7 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('name');
         $table->string('brand');
-        $table->decimal('size', 10, 1);
+        $table->decimal('size', 4, 1);
         $table->decimal('price', 8, 2);
         $table->string('color')->nullable();
         $table->text('description')->nullable();
