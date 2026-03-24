@@ -29,9 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // });
 
 
-        // Nasłuchiwanie na wpisywanie tekstu w filtrze
+        // Filtrowanie po nazwie
 
-        filtr.addEventListener('input', function () 
+        function ponazwie() 
         {
             const filtrujtekst = this.value.trim().toLowerCase();
 
@@ -39,24 +39,16 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 const text = item.textContent.toLowerCase();
                 const li = item.closest('li');  // Znajdź najbliższy element li
-                if (li.classList.contains('hidden') && !text.includes(filtrujtekst)) 
-                {
-                    li.classList.add('hidden');
-                }
-                else if (li.classList.contains('hidden') && text.includes(filtrujtekst))
-                {
-                    li.classList.add('hidden');
-                }
-                else if (!li.classList.contains('hidden') && !text.includes(filtrujtekst))
-                {
-                    li.classList.add('hidden');
-                }
-                else if (!li.classList.contains('hidden') && text.includes(filtrujtekst))
+                if (text.includes(filtrujtekst)) 
                 {
                     li.classList.remove('hidden');
                 }
+                else
+                {
+                    li.classList.add('hidden');
+                }
             });
-        });
+        };
 
         // Przetwarzanie cen i przechowywanie ich w atrybucie data-price
 
@@ -78,6 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
             lista.forEach(item =>
             {
                 const text = item.textContent;
+                item.classList.remove('hidden');
+                ponazwie();
                 if(text.includes(filtrujmarki) && text.includes(filtrujkat) && text.includes(filtrujrodz))
                 {
                     item.classList.remove('hidden');
