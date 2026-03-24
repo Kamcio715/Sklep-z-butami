@@ -38,6 +38,26 @@
         <label class="form-label">Adres</label>
         <textarea name="address" class="form-control" rows="3">{{ old('address') }}</textarea>
     </div>
+    <div class="mb-3">
+        <label for="delivery_method" class="form-label">Metoda dostawy</label>
+        <select name="delivery_method" id="delivery_method" class="form-select" required>
+            <option value="">Wybierz dostawę</option>
+            <option value="kurier">Kurier</option>
+            <option value="paczkomat">Paczkomat</option>
+            <option value="odbior_osobisty">Odbiór osobisty</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="payment_method" class="form-label">Metoda płatności</label>
+        <select name="payment_method" id="payment_method" class="form-select" required>
+            <option value="">Wybierz płatność</option>
+            <option value="blik">BLIK</option>
+            <option value="karta">Karta</option>
+            <option value="przy_odbiorze">Płatność przy odbiorze</option>
+        </select>
+    </div>
+
 
     <button class="btn btn-success">Złóż zamówienie</button>
 </form>

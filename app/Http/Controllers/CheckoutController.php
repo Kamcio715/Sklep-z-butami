@@ -33,28 +33,34 @@ class CheckoutController extends Controller
         }
 
         $data = $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_email' => 'required|email',
-            'customer_phone' => 'nullable|string|max:50',
-            'address' => 'required|string|max:500',
+            'customer_name'   => 'required|string|max:255',
+            'customer_email'  => 'required|email',
+            'customer_phone'  => 'nullable|string|max:50',
+            'address'         => 'required|string|max:500',
+            'delivery_method' => 'required|in:kurier,paczkomat,odbior_osobisty',
+            'payment_method'  => 'required|in:blik,karta,przy_odbiorze',
         ]);
 
-        $data['user_id'] = Auth::check() ? Auth::id() : null;
-
         $total = 0;
+
         foreach ($cart as $item) {
             $total += $item['price'] * $item['quantity'];
         }
 
+        $paymentStatus = $data['payment_method'] === 'przy_odbiorze' ? 'pending' : 'paid';
+
         Order::create([
-            'user_id' => $data['user_id'],
-            'customer_name' => $data['customer_name'],
-            'customer_email' => $data['customer_email'],
-            'customer_phone' => $data['customer_phone'] ?? null,
-            'address' => $data['address'],
-            'total' => $total,
-            'items' => $cart,
-        ]);
+        'user_id' => Auth::check() ? Auth::id() : null,
+        'customer_name'   => $data['customer_name'],
+        'customer_email'  => $data['customer_email'],
+        'customer_phone'  => $data['customer_phone'] ?? null,
+        'address'         => $data['address'],
+        'delivery_method' => $data['delivery_method'],
+        'payment_method'  => $data['payment_method'],
+        'payment_status'  => $paymentStatus,
+        'total'           => $total,
+        'items'           => $cart,
+    ]);
 
         session()->forget('cart');
 

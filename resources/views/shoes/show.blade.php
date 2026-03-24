@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <div class="container py-5">
     <div class="row g-5">
         <div class="col-lg-6">
@@ -172,19 +173,22 @@
                             <form action="{{ route('reviews.store', $shoe) }}" method="POST">
                                 @csrf
 
-                                <div class="mb-3">
-                                    <label for="rating" class="form-label">Ocena</label>
-                                    <select name="rating" id="rating" class="form-select @error('rating') is-invalid @enderror" required>
-                                        <option value="">Wybierz ocenę</option>
-                                        <option value="5" {{ old('rating') == 5 ? 'selected' : '' }}>5/5</option>
-                                        <option value="4" {{ old('rating') == 4 ? 'selected' : '' }}>4/5</option>
-                                        <option value="3" {{ old('rating') == 3 ? 'selected' : '' }}>3/5</option>
-                                        <option value="2" {{ old('rating') == 2 ? 'selected' : '' }}>2/5</option>
-                                        <option value="1" {{ old('rating') == 1 ? 'selected' : '' }}>1/5</option>
-                                    </select>
-                                    @error('rating')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                <div class="col-md-6">
+                                    <div class="rating-card p-4">
+                                        <div class="star-rating animated-stars">
+                                            <input type="radio" id="star5" name="rating" value="5">
+                                            <label for="star5" class="bi bi-star-fill"></label>
+                                            <input type="radio" id="star4" name="rating" value="4">
+                                            <label for="star4" class="bi bi-star-fill"></label>
+                                            <input type="radio" id="star3" name="rating" value="3">
+                                            <label for="star3" class="bi bi-star-fill"></label>
+                                            <input type="radio" id="star2" name="rating" value="2">
+                                            <label for="star2" class="bi bi-star-fill"></label>
+                                            <input type="radio" id="star1" name="rating" value="1">
+                                            <label for="star1" class="bi bi-star-fill"></label>
+                                        </div>
+                                        <p class="text-muted mt-2">Click to rate</p>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">

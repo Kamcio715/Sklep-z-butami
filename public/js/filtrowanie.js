@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const logo = document.getElementById('logo');
         const search = document.getElementById('search');
         const rozmiar = document.getElementById('rozm');
+        
 
         // Nasłuchiwanie na kliknięcie logo i kliknięcie poza polem wyszukiwania
 
@@ -72,6 +73,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
+        document.querySelectorAll('.star-rating:not(.readonly) label').forEach(star => {
+            star.addEventListener('click', function() {
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
         //Wywoływanie funkcji filtrowania
 
         marka.addEventListener('input', filtrowanie);
