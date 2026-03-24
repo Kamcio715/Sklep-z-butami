@@ -37,13 +37,7 @@
             @endforeach
         </select>
 
-        <h3>Wybierz rozmiar</h3>
-        <select id="rozm">
-            <option value="">Wszystkie</option>
-            @foreach($sizes as $size)
-                <option value="{{ $size }}">{{ $size }}</option>
-            @endforeach
-        </select>
+        
 
         <h3>Cena</h3>
         <input type="text" id="min" placeholder="Min cena">

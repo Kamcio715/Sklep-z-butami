@@ -17,16 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Nasłuchiwanie na kliknięcie logo i kliknięcie poza polem wyszukiwania
 
-        logo.addEventListener('click', (e) => {
-            e.preventDefault();
-            search.classList.toggle('active');
-        });
+        // logo.addEventListener('click', (e) => {
+        //     e.preventDefault();
+        //     search.classList.toggle('active');
+        // });
 
-        document.addEventListener('click', (e) => {
-            if (!search.contains(e.target) && !logo.contains(e.target)) {
-                search.classList.remove('active');
-            }
-        });
+        // document.addEventListener('click', (e) => {
+        //     if (!search.contains(e.target) && !logo.contains(e.target)) {
+        //         search.classList.remove('active');
+        //     }
+        // });
 
 
         // Nasłuchiwanie na wpisywanie tekstu w filtrze
@@ -39,7 +39,22 @@ document.addEventListener("DOMContentLoaded", function () {
             {
                 const text = item.textContent.toLowerCase();
                 const li = item.closest('li');  // Znajdź najbliższy element li
-                li.classList.toggle('hidden', !text.includes(filtrujtekst));
+                if (li.classList.contains('hidden') && !text.includes(filtrujtekst)) 
+                {
+                    li.classList.add('hidden');
+                }
+                else if (li.classList.contains('hidden') && text.includes(filtrujtekst))
+                {
+                    li.classList.add('hidden');
+                }
+                else if (!li.classList.contains('hidden') && !text.includes(filtrujtekst))
+                {
+                    li.classList.add('hidden');
+                }
+                else if (!li.classList.contains('hidden') && text.includes(filtrujtekst))
+                {
+                    li.classList.remove('hidden');
+                }
             });
         });
 
@@ -59,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const filtrujmarki = document.getElementById('marka').value;
             const filtrujkat = document.getElementById('kat').value;
             const filtrujrodz = document.getElementById('rodz').value;
-            const filtrujrozmiar = document.getElementById('rozm').value;
+            // const filtrujrozmiar = document.getElementById('rozm').value;
             lista.forEach(item =>
             {
                 const text = item.textContent;
@@ -93,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
         marka.addEventListener('input', filtrowanie);
         kat.addEventListener('input', filtrowanie);
         rodz.addEventListener('input', filtrowanie);
-        rozmiar.addEventListener('input', filtrowanie);
+        // rozmiar.addEventListener('input', filtrowanie);
         min.addEventListener('input', pocenie);
         max.addEventListener('input', pocenie);
 
