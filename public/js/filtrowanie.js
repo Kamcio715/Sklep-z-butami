@@ -28,60 +28,35 @@ document.addEventListener("DOMContentLoaded", function () {
         //     }
         // });
 
+        // Funkcja do filtrowania
 
-        // Filtrowanie po nazwie
+        function filtrowanie() {
+            const filtrujmarki = marka.value.trim().toLowerCase();
+            const filtrujkat = kat.value.trim().toLowerCase();
+            const filtrujrodz = rodz.value.trim().toLowerCase();
+            const filtrujtekst = filtr.value.trim().toLowerCase();
 
-        function ponazwie() 
-        {
-            const filtrujtekst = this.value.trim().toLowerCase();
-
-            nazwa.forEach(item => 
-            {
+            lista.forEach(item => {
                 const text = item.textContent.toLowerCase();
-                const li = item.closest('li');  // Znajdź najbliższy element li
-                if (text.includes(filtrujtekst)) 
-                {
-                    li.classList.remove('hidden');
-                }
-                else
-                {
-                    li.classList.add('hidden');
-                }
+                const nazwaTekst = item.querySelector('.nazwa')?.textContent.toLowerCase() || '';
+
+                let visible = true;
+
+                if (filtrujtekst && !nazwaTekst.includes(filtrujtekst)) visible = false;
+                if (filtrujmarki && !text.includes(filtrujmarki)) visible = false;
+                if (filtrujkat && !text.includes(filtrujkat)) visible = false;
+                if (filtrujrodz && !text.includes(filtrujrodz)) visible = false;
+
+                item.classList.toggle('hidden', !visible);
             });
-        };
+        }
 
         // Przetwarzanie cen i przechowywanie ich w atrybucie data-price
 
-        cena.forEach(item =>
-        {
+        cena.forEach(item => {
             nowacena.push(item.textContent.replace(' zł', ''));
             item.dataset.price = nowacena[nowacena.length - 1];
         });
-
-
-        // Funkcja do filtrowania
-
-        function filtrowanie()
-        {
-            const filtrujmarki = document.getElementById('marka').value;
-            const filtrujkat = document.getElementById('kat').value;
-            const filtrujrodz = document.getElementById('rodz').value;
-            // const filtrujrozmiar = document.getElementById('rozm').value;
-            lista.forEach(item =>
-            {
-                const text = item.textContent;
-                item.classList.remove('hidden');
-                ponazwie();
-                if(text.includes(filtrujmarki) && text.includes(filtrujkat) && text.includes(filtrujrodz))
-                {
-                    item.classList.remove('hidden');
-                }
-                else
-                {
-                    item.classList.add('hidden');
-                }
-            });
-        }
 
         // Funkcja do filtrowania po cenie
 
@@ -105,7 +80,5 @@ document.addEventListener("DOMContentLoaded", function () {
         // rozmiar.addEventListener('input', filtrowanie);
         min.addEventListener('input', pocenie);
         max.addEventListener('input', pocenie);
-
-
-
-});
+        filtr.addEventListener('input', filtrowanie);
+    });
