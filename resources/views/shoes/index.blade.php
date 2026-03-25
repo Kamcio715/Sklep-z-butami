@@ -14,26 +14,32 @@
     <div id="filtrpanel" class="filtrpanel">
 
         <h3>Wybierz markę</h3>
-        <select id="marka">
+        <select id="marka" name="brand">
             <option value="">Wszystkie</option>
             @foreach($brands as $brand)
-                <option value="{{ $brand }}">{{ $brand }}</option>
+                <option value="{{ $brand->brand }}" {{ request('brand') == $brand->brand ? 'selected' : '' }}>
+                    {{ $brand->brand }} ({{ $brand->total }})
+                </option>
             @endforeach
         </select>
 
         <h3>Wybierz kategorię</h3>
-        <select id="kat">
+        <select id="kat" name="category">
             <option value="">Wszystkie</option>
             @foreach($categories as $category)
-                <option value="{{ $category }}">{{ $category }}</option>
+                <option value="{{ $category->category }}" {{ request('category') == $category->category ? 'selected' : '' }}>
+                    {{ $category->category }} ({{ $category->total }})
+                </option>
             @endforeach
         </select>
 
         <h3>Wybierz rodzaj</h3>
-        <select id="rodz">
+        <select id="rodz" name="type">
             <option value="">Wszystkie</option>
             @foreach($types as $type)
-                <option value="{{ $type }}">{{ $type }}</option>
+                <option value="{{ $type->type }}" {{ request('type') == $type->type ? 'selected' : '' }}>
+                    {{ $type->type }} ({{ $type->total }})
+                </option>
             @endforeach
         </select>
 
@@ -48,7 +54,13 @@
         @if($shoes->count())
             <ul class="lista">
                 @foreach($shoes as $shoe)
-                    <li>
+                    <li
+                        data-name="{{ strtolower($shoe->name) }}"
+                        data-brand="{{ strtolower($shoe->brand) }}"
+                        data-category="{{ strtolower($shoe->category ?? '') }}"
+                        data-type="{{ strtolower($shoe->type ?? '') }}"
+                        data-price="{{ $shoe->price }}"
+                    >
                         <a href="{{ route('shoes.show', $shoe) }}" class="product-link">
                             <div class="product-card">
                                 @if($shoe->image)

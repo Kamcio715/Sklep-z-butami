@@ -83,6 +83,15 @@
     </div>
 
     <div class="mb-3">
+        <label class="form-label">Ilość na stanie</label>
+        <input type="number" name="stock" value="{{ old('stock', $shoe->stock ?? '') }}"
+            class="form-control @error('stock') is-invalid @enderror">
+        @error('stock')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+    <div class="mb-3">
         <label class="form-label">Zdjęcie</label>
         <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
         @error('image')

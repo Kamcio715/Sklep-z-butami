@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/naglowek.css') }}"> 
     <link rel="stylesheet" href="{{ asset('css/styl.css') }}">
     <script src="{{ asset('js/filtrowanie.js') }}"></script>
+    <script src="{{ asset('js/js.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     </head>
 <body>

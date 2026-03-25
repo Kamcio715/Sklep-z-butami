@@ -28,6 +28,14 @@
             </div>
 
             <h3 class="text-dark mb-4">{{ number_format($shoe->price, 2, ',', ' ') }} zł</h3>
+            <div class="product-meta">
+                Stan:
+                @if ($shoe->stock > 0)
+                    <span class="text-success">Dostępny ({{ $shoe->stock }} w magazynie)</span>
+                @else
+                    <span class="text-danger">Niedostępny</span>
+                @endif
+            </div>
 
             <div class="row row-cols-2 g-3 mb-4">
                 <div class="col">
@@ -73,19 +81,25 @@
                 </div>
             @endif
 
-            <form action="{{ route('cart.add', $shoe) }}" method="POST" class="d-flex gap-2 align-items-center flex-wrap">
-                @csrf
-                <input type="number"
-                       name="quantity"
-                       value="1"
-                       min="1"
-                       class="form-control"
-                       style="max-width: 120px;">
+            @if($shoe->stock > 0)
+                <form action="{{ route('cart.add', $shoe) }}" method="POST" class="mt-4">
+                    @csrf
+                    <div class="d-flex gap-2">
+                        <input
+                            type="number"
+                            name="quantity"
+                            value="{{ $item['quantity'] }}"
+                            min="1"
+                            class="form-control"
+                        >
 
-                <button type="submit" class="btn btn-success">
-                    Dodaj do koszyka
-                </button>
-            </form>
+
+                        <button class="btn btn-success">Dodaj do koszyka</button>
+                    </div>
+                </form>
+            @else
+                <button class="btn btn-secondary mt-4" disabled>Brak w magazynie</button>
+            @endif
         </div>
     </div>
 

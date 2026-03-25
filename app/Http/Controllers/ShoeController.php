@@ -8,36 +8,49 @@ use Illuminate\Support\Facades\Storage;
 
 class ShoeController extends Controller
 {
-    public function index()
-{
-    $shoes = Shoe::latest()->get();
+    public function index(Request $request)
+    {
+        $query = Shoe::query();
 
-    $brands = Shoe::select('brand')
-        ->whereNotNull('brand')
-        ->distinct()
-        ->orderBy('brand')
-        ->pluck('brand');
+        if ($request->filled('brand')) {
+            $query->where('brand', $request->brand);
+        }
 
-    $categories = Shoe::select('category')
-        ->whereNotNull('category')
-        ->distinct()
-        ->orderBy('category')
-        ->pluck('category');
+        if ($request->filled('category')) {
+            $query->where('category', $request->category);
+        }
 
-    $types = Shoe::select('type')
-        ->whereNotNull('type')
-        ->distinct()
-        ->orderBy('type')
-        ->pluck('type');
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
 
-    $sizes = Shoe::select('size')
-        ->whereNotNull('size')
-        ->distinct()
-        ->orderBy('size')
-        ->pluck('size');
+        if ($request->filled('q')) {
+            $query->where('name', 'like', '%' . $request->q . '%');
+        }
 
-    return view('shoes.index', compact('shoes', 'brands', 'categories', 'types', 'sizes'));
-}
+        $shoes = $query->latest()->paginate(12)->withQueryString();
+
+        $brands = Shoe::selectRaw('brand, COUNT(*) as total')
+            ->whereNotNull('brand')
+            ->groupBy('brand')
+            ->orderBy('brand')
+            ->get();
+
+        $categories = Shoe::selectRaw('category, COUNT(*) as total')
+            ->whereNotNull('category')
+            ->groupBy('category')
+            ->orderBy('category')
+            ->get();
+
+        $types = Shoe::selectRaw('type, COUNT(*) as total')
+            ->whereNotNull('type')
+            ->groupBy('type')
+            ->orderBy('type')
+            ->get();
+
+        return view('shoes.index', compact('shoes', 'brands', 'categories', 'types'));
+    }
+
 
 
 
@@ -76,6 +89,7 @@ class ShoeController extends Controller
             'type' => 'nullable|string|max:255',
             'size' => 'required|numeric|min:20|max:50',
             'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
             'color' => 'nullable|string|max:100',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
@@ -104,6 +118,7 @@ class ShoeController extends Controller
             'type' => 'nullable|string|max:255',
             'size' => 'required|numeric|min:20|max:50',
             'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
             'color' => 'nullable|string|max:100',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048',

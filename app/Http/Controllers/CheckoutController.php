@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Shoe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,8 +43,15 @@ class CheckoutController extends Controller
         ]);
 
         $total = 0;
-
+        
         foreach ($cart as $item) {
+            $shoe = Shoe::find($item['id']);
+            if (!$shoe) {
+                return redirect()->back()->with('error', 'Jeden z produktów nie jest już dostępny.');
+            }
+            if ($item['quantity'] > $shoe->stock) {
+                return redirect()->back()->with('error', 'Nie ma tyle produktów w magazynie: ' . $shoe->name);
+            }
             $total += $item['price'] * $item['quantity'];
         }
 
@@ -60,7 +68,13 @@ class CheckoutController extends Controller
         'payment_status'  => $paymentStatus,
         'total'           => $total,
         'items'           => $cart,
-    ]);
+        ]);
+
+        foreach ($cart as $item) {
+            $shoe = Shoe::find($item['id']);
+            $shoe->decrement('stock', $item['quantity']);
+        }
+
 
         session()->forget('cart');
 

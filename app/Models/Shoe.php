@@ -13,6 +13,7 @@ class Shoe extends Model
         'type',
         'size',
         'price',
+        'stock',
         'color',
         'description',
         'image',
