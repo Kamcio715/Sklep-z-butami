@@ -1,62 +1,88 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-4">Koszyk</h1>
+    <h1 class="mb-4">Koszyk</h1>
 
-@if(empty($cart))
-    <p>Koszyk jest pusty.</p>
-@else
-    <form action="{{ route('cart.clear') }}" method="POST" class="mb-3">
-        @csrf
-        <button class="btn btn-outline-danger btn-sm">Wyczyść koszyk</button>
-    </form>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <div class="table-responsive">
-        <table class="table table-bordered bg-white">
-            <thead>
-                <tr>
-                    <th>Produkt</th>
-                    <th>Marka</th>
-                    <th>Rozmiar</th>
-                    <th>Opis</th>
-                    <th>Ilość</th>
-                    <th>Cena</th>
-                    <th>Akcja</th>
-                    <th>Razem</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($cart as $item)
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if(empty($cart))
+        <div class="alert alert-info">
+            Koszyk jest pusty.
+        </div>
+    @else
+        <form action="{{ route('cart.clear') }}" method="POST" class="mb-3">
+            @csrf
+            <button type="submit" class="btn btn-outline-danger">Wyczyść koszyk</button>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead>
                     <tr>
-                        <td>{{ $item['name'] }}</td>
-                        <td>{{ $item['brand'] }}</td>
-                        <td>{{ $item['size'] }}</td>
-                        <td>{{ $item['description'] }}</td>
-                        <td>{{ $item['type'] }}</td>
-                        <td>{{ number_format($item['price'], 2, ',', ' ') }} zł</td>
-                        <td>
-                            <form action="{{ route('cart.update', $item['id']) }}" method="POST" class="d-flex gap-2">
-                                @csrf
-                                <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="0" class="form-control" style="max-width: 100px;">
-                                <button class="btn btn-primary btn-sm">Zmień</button>
-                            </form>
-                        </td>
-                        <td>{{ number_format($item['price'] * $item['quantity'], 2, ',', ' ') }} zł</td>
-                        <td>
-                            <form action="{{ route('cart.remove', $item['id']) }}" method="POST">
-                                @csrf
-                                <button class="btn btn-danger btn-sm">Usuń</button>
-                            </form>
-                        </td>
+                        <th>Produkt</th>
+                        <th>Marka</th>
+                        <th>Rozmiar</th>
+                        <th>Opis</th>
+                        <th>Rodzaj</th>
+                        <th>Cena</th>
+                        <th>Ilość</th>
+                        <th>Razem</th>
+                        <th>Akcja</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach($cart as $item)
+                        <tr>
+                            <td>{{ $item['name'] }}</td>
+                            <td>{{ $item['brand'] ?? '-' }}</td>
+                            <td>{{ $item['size'] ?? '-' }}</td>
+                            <td>{{ $item['description'] ?? '-' }}</td>
+                            <td>{{ $item['type'] ?? '-' }}</td>
+                            <td>{{ number_format($item['price'], 2, ',', ' ') }} zł</td>
+                            <td>
+                                <form action="{{ route('cart.update', $item['id']) }}" method="POST" class="d-flex gap-2">
+                                    @csrf
+                                    <input
+                                        type="number"
+                                        name="quantity"
+                                        value="{{ $item['quantity'] }}"
+                                        min="1"
+                                        class="form-control"
+                                        style="width: 90px;"
+                                        required
+                                    >
+                                    <button type="submit" class="btn btn-primary btn-sm">Zmień</button>
+                                </form>
+                            </td>
+                            <td>{{ number_format($item['price'] * $item['quantity'], 2, ',', ' ') }} zł</td>
+                            <td>
+                                <form action="{{ route('cart.remove', $item['id']) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-    <div class="d-flex justify-content-between align-items-center">
-        <h4>Razem: {{ number_format($total, 2, ',', ' ') }} zł</h4>
-        <a href="{{ route('checkout.index') }}" class="btn btn-success">Przejdź do zamówienia</a>
-    </div>
-@endif
+        <h2 class="mt-4">Razem: {{ number_format($total, 2, ',', ' ') }} zł</h2>
+
+        <div class="mt-3 d-flex justify-content-end">
+            <a href="{{ route('checkout.index') }}" class="btn btn-success">
+                Przejdź do zamówienia
+            </a>
+        </div>
+    @endif
 @endsection

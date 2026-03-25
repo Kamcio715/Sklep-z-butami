@@ -33,8 +33,23 @@ class CartController extends Controller
     // Zwiekszanie ilosci produktów w koszyku
     public function add(Request $request, Shoe $shoe)
     {
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        if($shoe->stock <= 0){
+            return redirect()->back()->with('error', 'Produkt jest niedostępny.');
+        }
+
         $quantity = max(1, (int) $request->input('quantity', 1));
         $cart = $this->getCart();
+
+        $currentQuantity = isset($cart[$shoe->id]) ? $cart[$shoe->id]['quantity'] : 0;
+        $newQuantity = $currentQuantity + $quantity;
+
+        if ($newQuantity > $shoe->stock) {
+            return redirect()->back()->with('error', 'Nie ma tyle produktów w magazynie.');
+        }
 
         if (isset($cart[$shoe->id])) {
             $cart[$shoe->id]['quantity'] += $quantity;
@@ -47,7 +62,8 @@ class CartController extends Controller
                 'description' => $shoe->description,
                 'type' => $shoe->type,
                 'price' => $shoe->price,
-                'quantity' => $quantity,
+                'quantity' => $newQuantity,
+                'stock' => $shoe->stock,
                 'image' => $shoe->image,
             ];
         }
@@ -59,21 +75,26 @@ class CartController extends Controller
 
     public function update(Request $request, Shoe $shoe)
     {
-        $quantity = (int) $request->input('quantity', 1);
-        $cart = $this->getCart();
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
 
-        if (isset($cart[$shoe->id])) {
-            if ($quantity <= 0) {
-                unset($cart[$shoe->id]);
-            } else {
-                $cart[$shoe->id]['quantity'] = $quantity;
-            }
-
-            $this->saveCart($cart);
+        if ($request->quantity > $shoe->stock) {
+            return redirect()->route('cart.index')
+                ->with('error', 'Nie możesz ustawić większej ilości niż dostępna w magazynie.');
         }
 
-        return back()->with('success', 'Koszyk został zaktualizowany.');
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$shoe->id])) {
+            $cart[$shoe->id]['quantity'] = (int) $request->quantity;
+            $cart[$shoe->id]['stock'] = $shoe->stock;
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->route('cart.index')->with('success', 'Ilość została zaktualizowana.');
     }
+
 
     public function remove(Shoe $shoe)
     {
