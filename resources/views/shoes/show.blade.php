@@ -88,11 +88,12 @@
                         <input
                             type="number"
                             name="quantity"
-                            value="{{ $item['quantity'] }}"
+                            value="1"
                             min="1"
                             class="form-control"
+                            style="width: 90px;"
+                            required
                         >
-
 
                         <button class="btn btn-success">Dodaj do koszyka</button>
                     </div>
