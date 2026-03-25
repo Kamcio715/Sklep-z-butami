@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/naglowek.css') }}"> 
     <script src="{{ asset('js/filtrowanie.js') }}"></script>
+    <script src="{{ asset('js/js.js') }}"></script>
     </head>
 <body>
     <header class="topbar py-3">
