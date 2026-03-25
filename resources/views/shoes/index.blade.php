@@ -48,7 +48,7 @@
         @if($shoes->count())
             <ul class="lista">
                 @foreach($shoes as $shoe)
-                    <li>
+                    <li class="card">
                         <a href="{{ route('shoes.show', $shoe) }}" class="product-link">
                             <div class="product-card">
                                 @if($shoe->image)
