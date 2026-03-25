@@ -54,12 +54,14 @@
         @if($shoes->count())
             <ul class="lista">
                 @foreach($shoes as $shoe)
+
                     <li
                         data-name="{{ strtolower($shoe->name) }}"
                         data-brand="{{ strtolower($shoe->brand) }}"
                         data-category="{{ strtolower($shoe->category ?? '') }}"
                         data-type="{{ strtolower($shoe->type ?? '') }}"
                         data-price="{{ $shoe->price }}"
+                        class="card"
                     >
                         <a href="{{ route('shoes.show', $shoe) }}" class="product-link">
                             <div class="product-card">
