@@ -67,11 +67,11 @@ a:visited {
 }
 .prawo a{
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 .koszyk {
     background-color: white;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     width: 38px;
     height: 38px;
     border: 1px solid black;

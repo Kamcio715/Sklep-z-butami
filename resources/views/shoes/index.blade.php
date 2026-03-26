@@ -9,7 +9,7 @@
             <button class="herobtn"><a href="#sekcja_z_butami">ZGARNIJ TERAZ</a></button>
         </div>
         <div class="heroimg">
-            <img src="{{ asset('storage/shoes/hero12.png') }}" alt="but">
+            <img src="{{ asset('storage/shoes/you were a reptile.png') }}" alt="but">
         </div>
     </section>
     <title>Sklep z butami</title>

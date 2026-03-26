@@ -23,7 +23,7 @@
         <a href="{{ route('shoes.index') }}" class="brand-logo">Sklep z butami</a>
         <div class="prawo">
             <img id="searchlogo" src="{{ asset('storage/shoes/lupa.png') }}" alt="searchlogo">
-            <a href="{{ route('cart.index') }}" class="koszyk"><img class="koszykimg" src="{{ asset('storage/shoes/basketicon.png') }}" alt="koszyk"></a>
+            <img class="koszykimg" onclick="window.location.href='{{ route('cart.index') }}'" src="{{ asset('storage/shoes/basketicon.png') }}" alt="koszyk">
             <img class="usericon" src="{{ asset('storage/shoes/usericon.png') }}" alt="ikona użytkownika">
             <div class="usermenu" id="usermenu">
                 @auth
