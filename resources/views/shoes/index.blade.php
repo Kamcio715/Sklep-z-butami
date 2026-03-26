@@ -5,11 +5,12 @@
     <section class="hero">
         <div class="heroleft">
             <h1>„Kocham Rebook i prezesa firmy 5/5"</h1>
-            <h1> - Nasza klientka</h1>
+            <h1> - Maciej Cichoń</h1>
             <button class="herobtn"><a href="#sekcja_z_butami">ZGARNIJ TERAZ</a></button>
         </div>
         <div class="heroimg">
             <img src="{{ asset('storage/shoes/you were a reptile.png') }}" alt="but">
+            <label>(Photo of Maciej Cichoń)</label>
         </div>
     </section>
     <title>Sklep z butami</title>

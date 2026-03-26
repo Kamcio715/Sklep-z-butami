@@ -49,15 +49,14 @@ main,
 }
 .usermenu {
     position: absolute;
+    right: -400px;
     top: 78px;
-    right: 0;
     background: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
     border-radius: 0px 0px 10px 10px;
     padding: 10px 0;
     width: 160px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    opacity: 0;
     transform: translateY(-10px);
     transition: 0.3s;
 }
@@ -74,7 +73,8 @@ main,
 }
 
 .usermenu.active {
-    opacity: 1;
+    right: 0;
+    top: 78px;
     transform: translateY(0);
     pointer-events: auto;
 }
@@ -162,7 +162,7 @@ main,
 }
 .search {
     position: fixed;
-    top: 11vh;
+    top: -5vh;
     left: 50%;
     transform: translateX(-50%) translateY(-20px);
     opacity: 0;
@@ -182,8 +182,9 @@ main,
     width: 250px;
 }
 .search.active {
+    top: 22vh;
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .filtr {
@@ -198,6 +199,9 @@ main,
     border-radius: 22px;
     color: #fff;
     box-shadow: 0 16px 35px rgba(0,0,0,0.18);
+    position: sticky;
+    top: 10vh;
+    z-index: 1;
 }
 
 .filtr h1 {
@@ -312,9 +316,7 @@ footer hr{
   color: #fff;
   padding: 40px 20px;
   margin-top: 60px;
-  bottom: 0;
   width: 100%;
-  position: relative;
 }
 .footercontainer {
   max-width: 1200px;
