@@ -22,7 +22,7 @@ body {
     height: 13vh;
     transition: top 0.3s ease;
     margin-bottom: 30px;
-    z-index: 1;
+    z-index: 3;
 }
 
 main,
@@ -258,7 +258,7 @@ main,
     align-items: center;
     text-align: center;
     position: fixed;
-    top: 10vh;
+    top: 0;
     left: -400px;
     width: 350px;
     height: 100%;
@@ -266,8 +266,9 @@ main,
     color: black;
     padding: 20px;
     transition: left 0.3s ease;
-    z-index: 2;
+    z-index: 4;
     border-right: 3px solid black;
+    box-sizing: border-box;
 }
 .filtrpanel img:nth-child(2){
     width: 50%;
@@ -284,6 +285,8 @@ main,
 }
 .filtrpanel.active{
     left: 0;
+    top: 0;
+    z-index: 4;
 }
 hr{
     background-color: #000000;
