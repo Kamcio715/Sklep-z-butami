@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function ()
         var nowacena = new Array();
         const min = document.getElementById('min');
         const max = document.getElementById('max');
-
+        const reset = document.getElementById('reset');
         const rozmiar = document.getElementById('rozm');
 
         // Funkcja do filtrowania
@@ -59,6 +59,16 @@ document.addEventListener("DOMContentLoaded", function ()
             });
         }
 
+        function resetFilters() {
+            marka.value = '';
+            kat.value = '';
+            rodz.value = '';
+            min.value = '';
+            max.value = '';
+            filtr.value = '';
+            lista.forEach(item => item.classList.remove('hidden'));
+        }
+
         //Wywoływanie funkcji filtrowania
 
         marka.addEventListener('input', filtrowanie);
@@ -68,4 +78,5 @@ document.addEventListener("DOMContentLoaded", function ()
         min.addEventListener('input', pocenie);
         max.addEventListener('input', pocenie);
         filtr.addEventListener('input', filtrowanie);
+        reset.addEventListener('click', resetFilters);
     });

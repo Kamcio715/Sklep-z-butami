@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Pobierz elementy DOM
+
     const filtr = document.getElementById('filtr');
     const marka = document.getElementById('marka');
     const kat = document.getElementById('kat');
@@ -8,7 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const lista = document.querySelectorAll('.lista li');
     const liczbaProduktow = document.getElementById('liczba-produktow');
 
-    function applyFilters() {
+    //Funkcja zliczająca pasujące elementy  
+
+    function applyFilters() 
+    {
         const tekst = filtr.value.trim().toLowerCase();
         const wybranaMarka = marka.value.toLowerCase();
         const wybranaKategoria = kat.value.toLowerCase();
@@ -23,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const cenaElement = item.querySelector('.cena');
             let cena = 0;
 
-            if (cenaElement) {
+            if (cenaElement) 
+            {
                 cena = parseFloat(
                     cenaElement.textContent
                         .replace('zł', '')
@@ -58,6 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
             liczbaProduktow.textContent = `Znaleziono: ${widoczne} produktów`;
         }
     }
+
+    // Dodaj nasłuchiwanie zdarzeń
 
     filtr.addEventListener('input', applyFilters);
     marka.addEventListener('change', applyFilters);
