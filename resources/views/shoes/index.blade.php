@@ -71,6 +71,7 @@
             <input type="text" id="min" placeholder="Min cena">
             <input type="text" id="max" placeholder="Max cena">
         </div>
+        <hr>
         <div class="filtrgrupa">
             <button id="reset" class="btn btn-secondary">Resetuj filtry</button>
         </div>
