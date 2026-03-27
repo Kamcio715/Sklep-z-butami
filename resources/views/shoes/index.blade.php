@@ -10,7 +10,6 @@
         </div>
         <div class="heroimg">
             <img src="{{ asset('storage/shoes/hero123.png') }}" alt="but">
-            <label>(Photo of Maciej Cichoń)</label>
         </div>
     </section>
     <title>Sklep z butami</title>

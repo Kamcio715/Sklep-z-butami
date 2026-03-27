@@ -14,6 +14,7 @@
     <script src="{{ asset('js/liczprod.js') }}"></script>
     <script src="{{ asset('js/panele.js') }}"></script>
     <script src="{{ asset('js/recenzje.js') }}"></script>
+    <script src="{{ asset('js/slide_naglowka.js') }}"></script>
     </head>
 <body>
     <header class="header">
